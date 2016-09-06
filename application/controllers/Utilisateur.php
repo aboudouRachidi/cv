@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Profil extends CI_Controller {
+class Utilisateur extends CI_Controller {
 
     function __construct(){
         parent::__construct();
@@ -24,13 +24,18 @@ class Profil extends CI_Controller {
 					'adresse' =>$this->input->post('adresse'),
 					'cp' =>$this->input->post('cp'),
 					'ville' =>$this->input->post('ville'),
+					'fixe' =>$this->input->post('fixe'),
+					'mobile' =>$this->input->post('mobile'),
 					'email' =>$this->input->post('email'),
+					'pseudo' =>$this->input->post('pseudo'),
+					'mdp' =>$this->input->post('mdp'),
 			);
 			
-			$this->Profil_model->new_Profil($data);
+			$this->Utilisateur_model->new_Profil($data);
 
-			$data = $this->session->set_flashdata('info','Le profil de '.'<b> '.$this->input->post('nom').'a été créer</b>');
-			//$info['success'] = 'Insertion réussie';
+			$data = $this->session->set_flashdata('info','Le profil de "'.'<b> '.$this->input->post('nom').'" a été créer</b>');
+			
+			redirect(base_url('utilisateur',$data));
 			
 
 			
@@ -39,7 +44,7 @@ class Profil extends CI_Controller {
 			
 			$this->load->view('templates/header');
 			$this->load->view('templates/menu');
-			$this->load->view('profil/profil_add');
+			$this->load->view('utilisateur/utilisateur_add');
 			$this->load->view('templates/footer');
 		}
 		
