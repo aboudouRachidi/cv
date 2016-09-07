@@ -8,7 +8,6 @@ class Utilisateur extends CI_Controller {
     }
 	public function index()
 	{
-
 		
 		$this->form_validation->set_rules('nom','Nom','trim|required|xss_clean');
 		$this->form_validation->set_rules('prenom','Prenom','trim|required|xss_clean');

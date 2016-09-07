@@ -1,8 +1,8 @@
 
 
 <div class="container">
-	<div class="jumbotron">			 
-	<form action="rubrique" method="POST">
+	<div class="jumbotron">	
+	<form action="<?=base_url('rubrique/update_rubrique/'.$this->uri->segment(3))?>" method="POST">
 			 
                 <div class="well well-sm"><strong><span class="glyphicon glyphicon-asterisk"></span>Champs requis</strong></div>
                 
@@ -37,23 +37,6 @@
 			 
 	</form>
 	</div>
-	
-		        <!-- Content Row -->
-	        <div class="row">
-	        	<?php if(!empty($rubriques)):?>
-				<?php foreach ($rubriques as $rubrique):?>
-					<!-- .col-md-4 -->
-		            <div class="col-md-4">
-		                <h2><?= $rubrique->titre?></h2>
-		                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-		                <a class="btn btn-success btn-xs" href="<?=base_url('cv/update_cv/'.$cv->idcv)?>">Modifier</a>
-		            </div>
-		            <!-- /.col-md-4 -->
-				<?php endforeach; ?>
-				<?php endif; ?>
-	
-	        </div>
-	        <!-- /.row -->
 </div>
 
 

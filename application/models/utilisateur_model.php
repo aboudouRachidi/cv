@@ -18,5 +18,22 @@ class Utilisateur_model extends CI_Model {
 		$this->db->insert('utilisateur',$data);
 	}
 	
-
+	/**
+	 * Permet de recuperer les données d'un utilisateur
+	 * @param $id utilisateur à trouver dans la base de données
+	 * @return tableau $data['users'] contenant les données de l'utilisateur
+	 */
+	function getAll($id){
+	
+		$this->db->where('idutilisateur = '.$id);
+		$Query = $this->db->get('utilisateur');
+		if($Query->num_rows()>0)
+		{
+			foreach ($Query->result() as $users)
+			{
+				$data[] = $users;
+			}
+			return $data;
+		}
+	}
 }

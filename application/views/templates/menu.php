@@ -21,14 +21,18 @@
 		        
 		        <li><a href="<?= base_url('rubrique')?>" >Rubrique du CV</a></li>
 		        
+		        <li><a href="<?= base_url('accueil/logout')?>" >Deconnexion</a></li>
+		        
 	        </ul>
 	    </div>
 
       </div>
     </nav>
+<br>
+<div class="clearfix"></div>
 <!-- si on a un message d'information quelconque on l'affiche dans cette <div> -->
 <?php if(isset($_SESSION['info'])):?>
 	<div class="alert alert-success text-center" id="alert-message"><span class="MsgInfo"><?=$_SESSION['info'];?></span></div>
 <?php endif;?>
-<br>
+
 	    

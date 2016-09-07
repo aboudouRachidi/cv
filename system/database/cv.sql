@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client :  127.0.0.1
--- Généré le :  Lun 05 Septembre 2016 à 23:54
+-- Généré le :  Mar 06 Septembre 2016 à 23:30
 -- Version du serveur :  5.6.17
 -- Version de PHP :  5.5.12
 
@@ -23,183 +23,97 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Structure de la table `details_loisirs`
+-- Structure de la table `cv`
 --
 
-CREATE TABLE IF NOT EXISTS `details_loisirs` (
-  `iddetails_loisirs` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`iddetails_loisirs`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `experience_pro`
---
-
-CREATE TABLE IF NOT EXISTS `experience_pro` (
-  `idexperience_pro` int(11) NOT NULL AUTO_INCREMENT,
-  `entreprise` varchar(45) DEFAULT NULL,
-  `annee_debut` date DEFAULT NULL,
-  `annee_fin` date DEFAULT NULL,
-  `poste` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idexperience_pro`)
+CREATE TABLE IF NOT EXISTS `cv` (
+  `idcv` int(11) NOT NULL AUTO_INCREMENT,
+  `date_creation` datetime DEFAULT CURRENT_TIMESTAMP,
+  `num_version` int(11) DEFAULT NULL,
+  `accroche` varchar(45) DEFAULT NULL,
+  `idutilisateur` int(11) NOT NULL,
+  PRIMARY KEY (`idcv`),
+  KEY `fk_cv_utilisateur_idx` (`idutilisateur`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Contenu de la table `experience_pro`
+-- Contenu de la table `cv`
 --
 
-INSERT INTO `experience_pro` (`idexperience_pro`, `entreprise`, `annee_debut`, `annee_fin`, `poste`) VALUES
-(1, 'Agnes Recup''art', '2016-01-04', '2016-02-05', 'Developpeur web'),
-(2, 'Agnes Recup''art', '2015-05-25', '2015-06-26', 'Developpeur web'),
-(3, 'BV photos', NULL, NULL, 'Assistant Photographe');
+INSERT INTO `cv` (`idcv`, `date_creation`, `num_version`, `accroche`, `idutilisateur`) VALUES
+(1, '2016-09-06 09:16:00', 0, 'Developpeur web', 1),
+(2, '2016-09-06 11:07:03', 0, 'Assistant Photographe', 1),
+(3, '2016-09-06 11:07:09', 0, 'Web designer', 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `experience_pro_has_mission`
+-- Structure de la table `rubrique`
 --
 
-CREATE TABLE IF NOT EXISTS `experience_pro_has_mission` (
-  `experience_pro_idexperience_pro` int(11) NOT NULL,
-  `mission_idmission` int(11) NOT NULL,
-  PRIMARY KEY (`experience_pro_idexperience_pro`,`mission_idmission`),
-  KEY `fk_experience_pro_has_mission_mission1_idx` (`mission_idmission`),
-  KEY `fk_experience_pro_has_mission_experience_pro_idx` (`experience_pro_idexperience_pro`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+CREATE TABLE IF NOT EXISTS `rubrique` (
+  `idrubrique` int(11) NOT NULL AUTO_INCREMENT,
+  `titre` varchar(45) DEFAULT NULL,
+  `contenu` longtext,
+  `idcv` int(11) NOT NULL,
+  PRIMARY KEY (`idrubrique`),
+  KEY `fk_rubrique_cv1_idx` (`idcv`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
+
+--
+-- Contenu de la table `rubrique`
+--
+
+INSERT INTO `rubrique` (`idrubrique`, `titre`, `contenu`, `idcv`) VALUES
+(1, 'Formation', 'BTS SIO – Lycée privée technologique sainte Ursule, Caen\r\n- Spécialité : SLAM (Solution logicielle Application Métier)\r\n', 1),
+(2, 'Experience professionnelle', 'Janv. - Fév. 2016 Agnès recup’art – Développeur – Caen\r\n- Refonte d’un site (HTML/CSS, PHP)\r\n- Intégration Template\r\n- Conception du Front-Office', 1),
+(3, 'Formation', '2014 Baccalauréat STMG – Lycée Younoussa Bamana – Mamoudzou\r\n- Spécialité : SIG (Système d’Information de Gestion)', 2);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `formation`
+-- Structure de la table `utilisateur`
 --
 
-CREATE TABLE IF NOT EXISTS `formation` (
-  `idformation` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(45) DEFAULT NULL,
-  `annee_debut` date DEFAULT NULL,
-  `annee_fin` date DEFAULT NULL,
-  `etablissement` varchar(45) DEFAULT NULL,
-  `lieu` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idformation`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;
-
---
--- Contenu de la table `formation`
---
-
-INSERT INTO `formation` (`idformation`, `libelle`, `annee_debut`, `annee_fin`, `etablissement`, `lieu`) VALUES
-(1, 'Baccalaureat STMG', '2013-08-28', '2014-07-04', 'lycée younoussa bamana', 'Mamoudzou (Mayotte)'),
-(2, 'BTS SIO', '2014-09-02', '2017-07-07', 'Lycée sainte ursule', 'Caen');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `langue`
---
-
-CREATE TABLE IF NOT EXISTS `langue` (
-  `idlangue` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(45) DEFAULT NULL,
-  `niveau` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idlangue`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Contenu de la table `langue`
---
-
-INSERT INTO `langue` (`idlangue`, `libelle`, `niveau`) VALUES
-(1, 'Anglais', 'Niveau scolaire');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `loisirs`
---
-
-CREATE TABLE IF NOT EXISTS `loisirs` (
-  `idloisirs` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idloisirs`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
-
---
--- Contenu de la table `loisirs`
---
-
-INSERT INTO `loisirs` (`idloisirs`, `libelle`) VALUES
-(1, 'Tennis');
-
--- --------------------------------------------------------
-
---
--- Structure de la table `loisirs_has_details_loisirs`
---
-
-CREATE TABLE IF NOT EXISTS `loisirs_has_details_loisirs` (
-  `loisirs_idloisirs` int(11) NOT NULL,
-  `details_loisirs_iddetails_loisirs` int(11) NOT NULL,
-  PRIMARY KEY (`loisirs_idloisirs`,`details_loisirs_iddetails_loisirs`),
-  KEY `fk_loisirs_has_details_loisirs_details_loisirs1_idx` (`details_loisirs_iddetails_loisirs`),
-  KEY `fk_loisirs_has_details_loisirs_loisirs1_idx` (`loisirs_idloisirs`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `mission`
---
-
-CREATE TABLE IF NOT EXISTS `mission` (
-  `idmission` int(11) NOT NULL AUTO_INCREMENT,
-  `libelle` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idmission`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
-
--- --------------------------------------------------------
-
---
--- Structure de la table `profil`
---
-
-CREATE TABLE IF NOT EXISTS `profil` (
-  `idprofil` int(11) NOT NULL AUTO_INCREMENT,
+CREATE TABLE IF NOT EXISTS `utilisateur` (
+  `idutilisateur` int(11) NOT NULL AUTO_INCREMENT,
   `nom` varchar(45) DEFAULT NULL,
   `prenom` varchar(45) DEFAULT NULL,
   `adresse` longtext,
   `cp` varchar(5) DEFAULT NULL,
   `ville` varchar(45) DEFAULT NULL,
   `email` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`idprofil`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;
+  `fixe` varchar(10) DEFAULT NULL,
+  `mobile` varchar(10) DEFAULT NULL,
+  `pseudo` varchar(45) DEFAULT NULL,
+  `mdp` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`idutilisateur`)
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;
 
 --
--- Contenu de la table `profil`
+-- Contenu de la table `utilisateur`
 --
 
-INSERT INTO `profil` (`idprofil`, `nom`, `prenom`, `adresse`, `cp`, `ville`, `email`) VALUES
-(1, 'Rachidi', 'Aboudou', 'Residence e.bacot\r\nbat B, apt 33\r\n10 bd marechal juin', '14000', 'Caen', 'ofcl-aboud976@live.fr');
+INSERT INTO `utilisateur` (`idutilisateur`, `nom`, `prenom`, `adresse`, `cp`, `ville`, `email`, `fixe`, `mobile`, `pseudo`, `mdp`) VALUES
+(1, 'Rachidi', 'Aboudou', 'Residence e.bacot\r\nbat B, apt 33\r\n10 bd marechal juin', '14000', 'Caen', 'ofcl-aboud976@live.fr', '0269632942', '0782942894', 'aboud976', '123456'),
+(2, 'Ladakpo', 'jibril', 'caen lycée sainte ursule', '14000', 'Caen', 'admin@local.fr', '0782999999', '782999999', 'jibjib', '123456'),
+(3, 'Jackson', 'Michael', 'neverland californie', '90089', 'Californie', 'admin@local.fr', '01xxxxxxxx', '02xxxxxxxx', 'MJ', '123456');
 
 --
 -- Contraintes pour les tables exportées
 --
 
 --
--- Contraintes pour la table `experience_pro_has_mission`
+-- Contraintes pour la table `cv`
 --
-ALTER TABLE `experience_pro_has_mission`
-  ADD CONSTRAINT `fk_experience_pro_has_mission_experience_pro` FOREIGN KEY (`experience_pro_idexperience_pro`) REFERENCES `experience_pro` (`idexperience_pro`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_experience_pro_has_mission_mission1` FOREIGN KEY (`mission_idmission`) REFERENCES `mission` (`idmission`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `cv`
+  ADD CONSTRAINT `fk_cv_utilisateur` FOREIGN KEY (`idutilisateur`) REFERENCES `utilisateur` (`idutilisateur`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
--- Contraintes pour la table `loisirs_has_details_loisirs`
+-- Contraintes pour la table `rubrique`
 --
-ALTER TABLE `loisirs_has_details_loisirs`
-  ADD CONSTRAINT `fk_loisirs_has_details_loisirs_loisirs1` FOREIGN KEY (`loisirs_idloisirs`) REFERENCES `loisirs` (`idloisirs`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `fk_loisirs_has_details_loisirs_details_loisirs1` FOREIGN KEY (`details_loisirs_iddetails_loisirs`) REFERENCES `details_loisirs` (`iddetails_loisirs`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+ALTER TABLE `rubrique`
+  ADD CONSTRAINT `fk_rubrique_cv1` FOREIGN KEY (`idcv`) REFERENCES `cv` (`idcv`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
