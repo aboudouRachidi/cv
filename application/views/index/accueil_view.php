@@ -54,13 +54,21 @@ var_dump($_SESSION);
         <div class="row">
         	<?php if(!empty($cvs)):?>
 			<?php foreach ($cvs as $cv):?>
-				<!-- .col-md-4 -->
-	            <div class="col-md-4">
-	                <h2><?= $cv->accroche?></h2>
-	                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-	                <a class="btn btn-success btn-xs" href="<?=base_url('cv/update_cv/'.$cv->idcv)?>">Modifier</a>
+				
+				<!-- .col-md-6 -->
+	            <div class="col-md-6 jumbotron">
+						<address>
+							<strong><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<?=$user->nom.' '.$user->prenom;?></strong><br>
+									<i>Version </i><?=$cv->num_version?><br>
+									<i></i><?=$cv->date_creation?><br>
+						</address>
+						<label>Accroche</label>
+						
+						<i><?= $cv->accroche?></i> 
+					<!-- /.well -->
+	                <a class="btn btn-success btn-xs" href="<?=base_url('cv/viewCv/'.$cv->idcv)?>">Afficher</a>
 	            </div>
-	            <!-- /.col-md-4 -->
+	            <!-- /.col-md-6 -->
 			<?php endforeach; ?>
 			<?php endif; ?>
 

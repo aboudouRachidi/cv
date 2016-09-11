@@ -13,6 +13,7 @@ class Accueil extends CI_Controller {
 		
 		$data['users'] = $this->Utilisateur_model->getAll($_SESSION['auth']['id']);
 		$data['cvs'] = $this->Rubrique_model->getAll_cv($_SESSION['auth']['id']);
+		$data['rubriques'] = $this->Rubrique_model->getRubrique($_SESSION['auth']['id']);
 		
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');

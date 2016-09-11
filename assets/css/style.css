@@ -2,4 +2,28 @@
 body {
         padding-top: 70px;
         /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
-        }
+}
+fieldset {
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+border-radius: 8px;
+}
+
+legend {
+border: solid 1px black;
+-webkit-border-radius: 8px;
+-moz-border-radius: 8px;
+border-radius: 8px;
+}
+
+#accroche{
+	font-style: oblique;
+	font-weight: bold;
+	font-variant: small-caps;
+	font-size: 25px;
+	font-family: "Times New Roman", Georgia, Serif;
+}
+
+.rubrique{
+	font-size: 12px;
+}

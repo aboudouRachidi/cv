@@ -31,5 +31,54 @@ class Rubrique_model extends CI_Model {
 			return $data;
 		}
 	}
+	
+	
+	/**
+	 * Permet de mettre à jour les données de la table rubrique selon les parametres
+	 * @param $id rubrique à trouver dans la base de données, $data données à modifier
+	 */
+	public function update_rubrique($idrubrique,$data)
+	{
+		$this->db->where('idrubrique', $idrubrique);
+		$this->db->update('rubrique', $data);
+		// Produces:
+		//
+		//      UPDATE mytable
+		//      SET title = '{$title}', name = '{$name}', date = '{$date}'
+		//
+	}
+	
+	public function getRubrique($id){
+		//$this->db->where('cv.idutilisateur = '.$id);
+		$Query = $this->db->query('SELECT * 
+				FROM rubrique,cv 
+				WHERE cv.idcv = rubrique.idcv 
+				AND cv.idcv = '.$id);
+		if($Query->num_rows() > 0 ){
+			foreach ($Query->result() as $rubriques)
+			{
+				$data[] = $rubriques;
+			}
+		
+			return $data;
+		}
+		
+	}
+	
+	public function getRubriqueData($id){
+		//$this->db->where('cv.idutilisateur = '.$id);
+		$Query = $this->db->query('SELECT *
+				FROM rubrique
+				WHERE rubrique.idrubrique = '.$id);
+		if($Query->num_rows() > 0 ){
+			foreach ($Query->result() as $rubriques)
+			{
+				$data[] = $rubriques;
+			}
+	
+			return $data;
+		}
+	
+	}
 
 }

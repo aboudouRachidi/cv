@@ -9,6 +9,9 @@
 <!-- font-awesome -->
 <link rel="stylesheet" type='text/css' href="<?=base_url()?>assets/css/font-awesome/css/font-awesome.css">
 <!-- font-awesome -->
+<!-- Ckeditor -->
+<script src="<?= base_url()?>assets/ckeditorFull/ckeditor.js"></script>
+<!-- /Ckeditor -->
 </head>
 <body>
 	

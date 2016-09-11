@@ -34,10 +34,11 @@
         	<?php if(!empty($cvs)):?>
 			<?php foreach ($cvs as $cv):?>
 				<!-- .col-md-4 -->
-	            <div class="col-md-4">
-	                <h2><?= $cv->accroche?></h2>
-	                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Saepe rem nisi accusamus error velit animi non ipsa placeat. Recusandae, suscipit, soluta quibusdam accusamus a veniam quaerat eveniet eligendi dolor consectetur.</p>
-	                <a class="btn btn-success btn-xs" href="<?=base_url('cv/update_cv/'.$cv->idcv)?>">Modifier</a>
+	            <div class="col-md-4 well">
+	                <h3><i class="fa fa-file-text-o" aria-hidden="true"></i> <?= $cv->accroche?></h3>
+						<i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;<?php $bad_date = $cv->date_creation; echo $better_date = nice_date($bad_date, 'd-m-Y H:i:s')?><br>
+						<i class="fa fa-cog" aria-hidden="true"> Version</i>&nbsp;<?=$cv->num_version?><br>
+	                <a class="btn btn-success btn-xs" href="<?=base_url('cv/viewCv/'.$cv->idcv)?>">Afficher</a>
 	            </div>
 	            <!-- /.col-md-4 -->
 			<?php endforeach; ?>

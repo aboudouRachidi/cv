@@ -18,18 +18,18 @@ class Rubrique extends CI_Controller {
 			$data = array(
 					'titre' =>$this->input->post('titre'),
 					'contenu' =>$this->input->post('contenu'),
-					'idcv' =>$this->input->post('cv'),
+					'idcv' =>$this->input->post('idcv'),
 			);
 		
 			$this->Rubrique_model->new_rubrique($data);
 		
-			$data = $this->session->set_flashdata('info','La rubrique "'.'<b> '.$this->input->post('titre').'" a été créer pour le CV selectionner</b>');
+			$data = $this->session->set_flashdata('info','La rubrique "'.'<b> '.$this->input->post('titre').'" a été créer pour le CV '.$this->input->post('accroche').'</b>');
 		
-			redirect(base_url('rubrique',$data));
+			redirect(base_url('cv/viewCv/'.$this->uri->segment(3),$data));
 		
 		}else{
 			//$data['users'] = $this->Rubrique_model->getUser_cv(1);
-			$data['cvs'] = $this->Rubrique_model->getAll_cv($_SESSION['auth']['id']);
+			$data['cvs'] = $this->Cv_model->getCv($this->uri->segment(3));
 			
 			$this->load->view('templates/header');
 			$this->load->view('templates/menu');
@@ -52,21 +52,23 @@ class Rubrique extends CI_Controller {
 			$data = array(
 					'titre' =>$this->input->post('titre'),
 					'contenu' =>$this->input->post('contenu'),
-					'idcv' =>$this->input->post('cv'),
+					
 			);
 	
 			$this->Rubrique_model->update_rubrique($this->uri->segment(3),$data);
 	
-			$data = $this->session->set_flashdata('info','La rubrique "'.'<b> '.$this->input->post('titre').'" a été mis à jour</b>');
+			$data = $this->session->set_flashdata('info','La rubrique "'.'<b> '.$this->input->post('titre').'</b>" a été mis à jour');
 	
-			redirect(base_url('rubrique',$data));
+			redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
 	
 		}else{
 			$data['cvs'] = $this->Cv_model->getData_cv($this->uri->segment(3));
-	
+			$data['rubriques'] = $this->Rubrique_model->getRubriqueData($this->uri->segment(3));
+			$data['users'] = $this->Utilisateur_model->getAll($_SESSION['auth']['id']);
+			
 			$this->load->view('templates/header');
 			$this->load->view('templates/menu');
-			$this->load->view('cv/cv_update',$data);
+			$this->load->view('rubrique/rubrique_update',$data);
 			$this->load->view('templates/footer');
 		}
 	}
