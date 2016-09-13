@@ -23,7 +23,7 @@ class Rubrique extends CI_Controller {
 		
 			$this->Rubrique_model->new_rubrique($data);
 		
-			$data = $this->session->set_flashdata('info','La rubrique "'.'<b> '.$this->input->post('titre').'" a été créer pour le CV '.$this->input->post('accroche').'</b>');
+			$data = $this->session->set_flashdata('info','La rubrique <b>"'.$this->input->post('titre').'"</b> a été créer pour le CV <b>"'.$this->input->post('accroche').'"</b>');
 		
 			redirect(base_url('cv/viewCv/'.$this->uri->segment(3),$data));
 		
@@ -57,7 +57,7 @@ class Rubrique extends CI_Controller {
 	
 			$this->Rubrique_model->update_rubrique($this->uri->segment(3),$data);
 	
-			$data = $this->session->set_flashdata('info','La rubrique "'.'<b> '.$this->input->post('titre').'</b>" a été mis à jour');
+			$data = $this->session->set_flashdata('info','La rubrique <b>"'.$this->input->post('titre').'"</b> a été mis à jour');
 	
 			redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
 	
@@ -71,5 +71,28 @@ class Rubrique extends CI_Controller {
 			$this->load->view('rubrique/rubrique_update',$data);
 			$this->load->view('templates/footer');
 		}
+	}
+	
+	public function deleteRubrique(){
+
+		
+		//if($this->Rubrique_model->DeleteRubrique($this->uri->segment(3))){
+		$this->Rubrique_model->DeleteRubrique($this->uri->segment(3));
+			$data = $this->session->set_flashdata('info', '<b>La rubrique a été supprimé</b>');
+			redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+		//}
+		/*
+		else{
+			$data = $this->session->set_flashdata('erreur', 'Impossible d\'effectuer cette opération');
+			redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+		}
+		*/
+	}
+	
+	public function positionRubrique(){
+		
+		$this->Rubrique_model->PositionRubrique($this->uri->segment(3));
+		$data = $this->session->set_flashdata('info', '<b>Position modifié</b>');
+		redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
 	}
 }

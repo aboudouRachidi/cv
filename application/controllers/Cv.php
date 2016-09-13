@@ -23,7 +23,7 @@ class Cv extends CI_Controller {
 			//$data['users'] = $this->Login_model->getAll($_SESSION['auth']['id']);
 			$this->Cv_model->new_cv($data);
 		
-			$data = $this->session->set_flashdata('info','Le cv "'.'<b> '.$this->input->post('accroche').'" a été créer</b>');
+			$data = $this->session->set_flashdata('info','Le cv "'.'<b> '.$this->input->post('accroche').'"</b> a été créer');
 		
 			redirect(base_url('cv',$data));
 		
@@ -58,7 +58,7 @@ class Cv extends CI_Controller {
 	
 			$this->Cv_model->update_cv($this->uri->segment(3),$data);
 	
-			$data = $this->session->set_flashdata('info','Le cv "'.'<b> '.$this->input->post('accroche').'" a été mis à jour</b>');
+			$data = $this->session->set_flashdata('info','Le cv "'.'<b> '.$this->input->post('accroche').'"</b> a été mis à jour');
 	
 			redirect(base_url('cv',$data));
 	
@@ -92,16 +92,18 @@ class Cv extends CI_Controller {
 			);
 	
 			$this->Cv_model->update_cv($this->uri->segment(3),$data);
-	
-			$data = $this->session->set_flashdata('info','Le cv "'.'<b> '.$this->input->post('accroche').'" a été mis à jour</b>');
+			
+			$data = $this->session->set_flashdata('info','Le cv "'.'<b> '.$this->input->post('accroche').'"</b> a été mis à jour');
 	
 			redirect(base_url('cv',$data));
 	
 		}else{
+			
 			$data['cvs'] = $this->Cv_model->getData_cv($this->uri->segment(3));
 			$data['users'] = $this->Utilisateur_model->getAll($_SESSION['auth']['id']);
 			$data['rubriques'] = $this->Rubrique_model->getRubrique($this->uri->segment(3));
-				
+			$data['total_rubrique'] = $this->Rubrique_model->countRubrique($this->uri->segment(3));
+			
 			$this->load->view('templates/header');
 			$this->load->view('templates/menu');
 			$this->load->view('cv/cv_view',$data);

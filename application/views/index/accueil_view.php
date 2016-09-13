@@ -24,12 +24,12 @@ var_dump($_SESSION);
 					
 					<address>
 						<strong>E-mail</strong><br>
-							<a href="mailto:daxipol@gmail.com"><?=$_SESSION['auth']['email']?></a><br>
+							<a href="#"><?=$_SESSION['auth']['email']?></a><br>
 							<abbr title = "Tel"><i class="fa fa-phone"></i></abbr> <?=$user->mobile?>
 					</address>
 					<a class="btn btn-primary btn-xm" href="<?=base_url('cv')?>">Créer un CV!</a>
 				</div>
-			<p>
+
 	
 		</div>
             <!-- /.col-md-4 -->
@@ -57,16 +57,18 @@ var_dump($_SESSION);
 				
 				<!-- .col-md-6 -->
 	            <div class="col-md-6 jumbotron">
+	            	<div class="well">
 						<address>
 							<strong><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<?=$user->nom.' '.$user->prenom;?></strong><br>
-									<i>Version </i><?=$cv->num_version?><br>
-									<i></i><?=$cv->date_creation?><br>
+									<i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;<?php $bad_date = $cv->date_creation; echo $better_date = nice_date($bad_date, 'd-m-Y H:i:s')?><br>
+						<i class="fa fa-cog" aria-hidden="true"> Version</i>&nbsp;<?=$cv->num_version?><br>
 						</address>
 						<label>Accroche</label>
 						
-						<i><?= $cv->accroche?></i> 
+						<i><?= $cv->accroche?></i>
+					</div>
 					<!-- /.well -->
-	                <a class="btn btn-success btn-xs" href="<?=base_url('cv/viewCv/'.$cv->idcv)?>">Afficher</a>
+	                <a class="btn btn-success btn-xs" href="<?=base_url('cv/viewCv/'.$cv->idcv)?>">Editer</a>
 	            </div>
 	            <!-- /.col-md-6 -->
 			<?php endforeach; ?>

@@ -30,7 +30,7 @@ class Accueil extends CI_Controller {
 				
 		}
 			
-		$this->form_validation->set_rules('email','Email','trim|required|xss_clean|valid_email');
+		$this->form_validation->set_rules('email','Email','trim|required|xss_clean');
 		$this->form_validation->set_rules('mdp','Mot de passe','trim|required|xss_clean');
 		
 		if($this->form_validation->run())
@@ -41,11 +41,13 @@ class Accueil extends CI_Controller {
 			{
 		
 				$data['users'] = $this->Accueil_model->getAll($_SESSION['auth']['id']);
+				//$data = $this->session->set_flashdata('info','Connexion réussi "'.'<b>'.$this->input->post('email').'"</b>');
+				
 				redirect('accueil',$data);
 		
 			}else{
 
-				$data = $this->session->set_flashdata('info','<b>Identifiant ou mot de passe incorrect</b>');
+				$data = $this->session->set_flashdata('erreur','<b>Identifiant ou mot de passe incorrect</b>');
 				$this->load->view('templates/header');
 				$this->load->view('templates/menu');
 				$this->load->view('index/login');

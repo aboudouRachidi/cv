@@ -65,5 +65,14 @@ class Cv_model extends CI_Model {
 		//      SET title = '{$title}', name = '{$name}', date = '{$date}'
 		//
 	}
+	
+	public function countCv($id){
+		$this->db->select('idcv');
+        $this->db->from('cv');
+        $this->db->where('idutilisateur = '.$id);
+        $query = $this->db->get();
+        return $query->num_rows();
+	}
+	
 
 }

@@ -15,7 +15,7 @@
 		        
 		        <li><a href="<?= base_url('accueil')?>" >Accueil</a></li>
 		        
-		        <li><a href="<?= base_url('utilisateur')?>" >Utilisateur</a></li>
+		        <li><a href="<?= base_url('utilisateur')?>" >Mon profil</a></li>
 		        
 		        <li><a href="<?= base_url('cv')?>" >CV</a></li>
 		        
@@ -23,14 +23,20 @@
 		        
 	        </ul>
 	    </div>
-
+			<!-- si on a un message d'information quelconque on l'affiche dans cette <div> -->
+			<?php if(isset($_SESSION['info'])):?>
+				<div class="alert alert-success text-center" id="alert-message">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<span class="MsgInfo"><?=$_SESSION['info'];?></span>
+				</div>
+			<?php endif;?>
+			<?php if(isset($_SESSION['erreur'])):?>
+				<div class="alert alert-danger text-center" id="alert-message">
+					<a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+					<span class="MsgErreur"><?=$_SESSION['erreur'];?></span>
+				</div>
+			<?php endif;?>
+			<!-- fin de message -->
       </div>
     </nav>
-<br>
 <div class="clearfix"></div>
-<!-- si on a un message d'information quelconque on l'affiche dans cette <div> -->
-<?php if(isset($_SESSION['info'])):?>
-	<div class="alert alert-success text-center" id="alert-message"><span class="MsgInfo"><?=$_SESSION['info'];?></span></div>
-<?php endif;?>
-
-	    

@@ -78,7 +78,29 @@ class Rubrique_model extends CI_Model {
 	
 			return $data;
 		}
+	}
 	
+	/**
+	 * Permet de supprimer une rubrique
+	 * @param $id du rubrique dans la base de données
+	 */
+	public function DeleteRubrique($id){
+		
+		$this->db->where('idrubrique', $id);
+		$this->db->delete('rubrique');
+		
+		// Produces:
+		// DELETE FROM rubrique
+		// WHERE idrubrique = $id
+	
+	}
+	
+	public function countRubrique($id){
+		$this->db->select('idrubrique');
+		$this->db->from('rubrique');
+		$this->db->where('idcv = '.$id);
+		$query = $this->db->get();
+		return $query->num_rows();
 	}
 
 }

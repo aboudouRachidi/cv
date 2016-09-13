@@ -1,16 +1,16 @@
 AddDefaultCharset UTF-8
 
-#<IfModule mod_rewrite.c>
-#	RewriteEngine On
-#	RewriteBase /cv/
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /cv/
 	
-#	RewriteCond %{REQUEST_FILENAME} !-f  
+	RewriteCond %{REQUEST_FILENAME} !-f  
 #	RewriteCond %{HTTP_ACCEPT} !(.*images.*)
-#	RewriteRule ^(.*)$ index.php/$1 [L]
+	RewriteRule ^(.*)$ index.php/$1 [L]
 
-#</IfModule>
+</IfModule>
 
-RewriteEngine on
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*)$ index.php/$1 [L]
+#RewriteEngine on
+#RewriteCond %{REQUEST_FILENAME} !-f
+#RewriteCond %{REQUEST_FILENAME} !-d
+#RewriteRule ^(.*)$ index.php/$1 [L]

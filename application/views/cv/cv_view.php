@@ -7,11 +7,11 @@
 	<div class="jumbotron">	
 		<?php foreach ($users as $user):?>
 		<fieldset>
-		<legend class="bg-success">Informations Personnel</legend>
+		<legend class="bg-success"><i class="fa fa-user-secret" aria-hidden="true"></i> Informations Personnel</legend>
 		<div class="well">
 			<address>
 				<strong><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<?=$user->nom.' '.$user->prenom;?></strong>
-				<a class="btn btn-info btn-xs" href="#">Modifier les informations</a><br>
+				<a class="btn btn-info btn-xs" href="<?=base_url('utilisateur')?>"><i class="fa fa-pencil-square" aria-hidden="true"></i> Modifier les informations</a><br>
 						<i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;<?php $bad_date = $cv->date_creation; echo $better_date = nice_date($bad_date, 'd-m-Y H:i:s')?><br>
 						<i class="fa fa-cog" aria-hidden="true"> Version</i>&nbsp;<?=$cv->num_version?><br>
 						<p id="accroche" class="text-center"><?= $cv->accroche?>
@@ -45,9 +45,11 @@
 					-->
 				
 					<fieldset>
-					<legend class="bg-success">Rubriques</legend>
+					<legend class="bg-success"><i class="fa fa-book" aria-hidden="true"></i> Rubriques <i>(<?=$total_rubrique?>)</i></legend>
 					<span>
-						<a class="btn btn-warning btn-xs" href="<?=base_url('rubrique/index/'.$cv->idcv)?>">Ajouter une rubrique</a>
+						<a class="btn btn-warning btn-xs" href="<?=base_url('rubrique/index/'.$cv->idcv)?>">
+							<i class="fa fa-plus-square" aria-hidden="true"></i> Ajouter une rubrique
+						</a>
 					</span>
 				<div class="well">
 						<?php if(!empty($rubriques)):?>
@@ -65,8 +67,29 @@
 									<i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
 								<a href="<?=base_url('rubrique/update_rubrique/'.$rubrique->idrubrique.'/'.$rubrique->idcv)?>" type="button" class="btn btn-success btn-xs" title="Modifier">
 									<i class="fa fa-pencil-square" aria-hidden="true" ></i></a>
-								<a href="#" type="button" class="btn btn-danger btn-xs" title="Supprimer">
+								<a href="#" type="button" class="btn btn-danger btn-xs" title="Supprimer" data-toggle="modal" data-target="#rubrique<?=$rubrique->idrubrique?>">
 									<i class="fa fa-times" aria-hidden="true"></i></a>
+
+									<!-- Modal -->
+									<div class="modal fade" id="rubrique<?=$rubrique->idrubrique?>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+									  <div class="modal-dialog" role="document">
+									    <div class="modal-content">
+									      <div class="modal-header">
+									        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+									        <h4 class="modal-title text-center" id="myModalLabel">Confirmation suppression</h4>
+									      </div>
+									      <div class="modal-body">
+									        Etes vous sûr de vouloir supprimer cette rubrique ?
+									      </div>
+									      <div class="modal-footer">
+									    	<a href="<?=base_url('rubrique/deleteRubrique/'.$rubrique->idrubrique.'/'.$rubrique->idcv)?>" type="button" class="btn btn-danger" title="Supprimer">
+									    		Supprimer
+									    	</a>
+									        <button type="button" class="btn btn-default" data-dismiss="modal">Annuler</button>
+									      </div>
+									    </div>
+									  </div>
+									</div>
 							</div>
 						<?php endforeach;?>
 						<?php endif;?>

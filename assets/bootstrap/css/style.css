@@ -10,10 +10,12 @@ border-radius: 8px;
 }
 
 legend {
-border: solid 1px black;
--webkit-border-radius: 8px;
--moz-border-radius: 8px;
-border-radius: 8px;
+	border: solid 1px black;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	font-weight: bold;
+	color: #400000;
 }
 
 #accroche{

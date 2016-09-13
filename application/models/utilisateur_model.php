@@ -36,4 +36,20 @@ class Utilisateur_model extends CI_Model {
 			return $data;
 		}
 	}
+	
+	function updateUser($id,$data){
+		
+		$this->db->where('idutilisateur', $id);
+		$this->db->update('utilisateur', $data);
+		// Produces:
+		//
+		//      UPDATE utilisateur
+		//      SET nom = '{$nom}',....'
+		//      WHERE idutillisateur = $id
+	}
+	
+	function updatePassword($id,$data){
+		$this->db->where('idutilisateur', $id);
+		$this->db->update('utilisateur', $data);
+	}
 }
