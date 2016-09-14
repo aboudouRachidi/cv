@@ -53,7 +53,7 @@ class Rubrique_model extends CI_Model {
 		$Query = $this->db->query('SELECT * 
 				FROM rubrique,cv 
 				WHERE cv.idcv = rubrique.idcv 
-				AND cv.idcv = '.$id);
+				AND cv.idcv = '.$id.' ORDER BY position');
 		if($Query->num_rows() > 0 ){
 			foreach ($Query->result() as $rubriques)
 			{
@@ -101,6 +101,50 @@ class Rubrique_model extends CI_Model {
 		$this->db->where('idcv = '.$id);
 		$query = $this->db->get();
 		return $query->num_rows();
+	}
+	
+	public function getMaxPositionRubrique($id){
+		
+		/*$this->db->where('rubrique.idcv  = '.$id);
+		$this->db->select_max('position');
+		$query = $this->db->get('rubrique');
+		
+		
+		/*$Query = $this->db->query('SELECT max(position)
+		FROM rubrique
+		WHERE rubrique.idcv = '.$id);*/
+	
+		$query = $this->db->select_max('position')->where('rubrique.idcv  = '.$id)->get('rubrique')->result_array();
+    	return (int) $query[0]['position'];
+	}
+	
+	public function getMinPositionRubrique($id){
+	
+		$query = $this->db->select_min('position')->where('rubrique.idcv  = '.$id)->get('rubrique')->result_array();
+		return (int) $query[0]['position'];
+	}
+	
+	public function updatePosition($position1,$id){
+		
+		$this->db->set('position', $position1, FALSE);
+		$this->db->where('rubrique.idrubrique', $id);
+		$this->db->update('rubrique');
+		
+	}
+	
+	public function updateNewPosition($NewPosition,$id){
+	
+		$this->db->set('position', $NewPosition, FALSE);
+		$this->db->where('rubrique.idrubrique', $id);
+		$this->db->update('rubrique');
+	
+	}
+	
+	public function getNewPositionRubriqueId($position){
+		
+		$query = $this->db->select('idrubrique')->where('position  = '.$position)->get('rubrique')->result_array();
+		return (int) $query[0]['idrubrique'];
+		
 	}
 
 }

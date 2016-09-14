@@ -1,8 +1,5 @@
-<?php
-var_dump($_SESSION);
-?>
 <!-- Page Content -->
-<div class="container">
+<div class="container" style="padding-top: 90px">
 
 <!-- Heading Row -->
 	<div class="row">
@@ -18,8 +15,8 @@ var_dump($_SESSION);
 				<div class="well">
 					<address>
 						<strong><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<?=$user->nom.' '.$user->prenom;?></strong><br>
-								<?=$user->adresse?><br>
-								<?=$user->cp.', '.$user->ville?><br>
+								<i class="fa fa-home" aria-hidden="true"></i>&nbsp;<?=$user->adresse?><br>
+								<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; <?=$user->cp.', '.$user->ville?><br>
 					</address>
 					
 					<address>
@@ -43,7 +40,7 @@ var_dump($_SESSION);
         <div class="row">
             <div class="col-lg-12">
                 <div class="well text-center">
-                    Mes Curriculum vitae
+                    <strong>Mes Curriculum vitae (<?=$total_cv?>)</strong>
                 </div>
             </div>
             <!-- /.col-lg-12 -->
@@ -69,6 +66,7 @@ var_dump($_SESSION);
 					</div>
 					<!-- /.well -->
 	                <a class="btn btn-success btn-xs" href="<?=base_url('cv/viewCv/'.$cv->idcv)?>">Editer</a>
+	                <!--<a class="btn btn-default btn-xs" href="#">Aperçu Rapide</a>-->
 	            </div>
 	            <!-- /.col-md-6 -->
 			<?php endforeach; ?>

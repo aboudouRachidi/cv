@@ -13,14 +13,24 @@
 	    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 	        <ul class="nav navbar-nav">
 		        
-		        <li><a href="<?= base_url('accueil')?>" >Accueil</a></li>
+		        <li><a href="<?= base_url('accueil')?>" ><i class="fa fa-home" aria-hidden="true"></i>&nbsp;Accueil</a></li>
+		     
+		     <?php if(isset($_SESSION['auth']['id'])){?>   
+		        <li><a href="<?= base_url('utilisateur')?>" ><i class="fa fa-user" aria-hidden="true"></i>&nbsp;Mon profil</a></li>
 		        
-		        <li><a href="<?= base_url('utilisateur')?>" >Mon profil</a></li>
+		        <li><a href="<?= base_url('cv')?>" ><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;Cv</a></li>
 		        
-		        <li><a href="<?= base_url('cv')?>" >CV</a></li>
 		        
-		        <li><a href="<?= base_url('accueil/logout')?>" >Deconnexion</a></li>
-		        
+		      
+				<li role="presentation" class="dropdown">
+					<a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+						<?=$_SESSION['auth']['email']?> <span class="caret"></span>
+					</a>
+				<ul class="dropdown-menu">
+				      <li><a href="<?= base_url('accueil/logout')?>" ><i class="fa fa-power-off" aria-hidden="true"></i>&nbsp;Deconnexion</a></li>
+				</ul>
+				</li>
+		      <?php }?>  
 	        </ul>
 	    </div>
 			<!-- si on a un message d'information quelconque on l'affiche dans cette <div> -->

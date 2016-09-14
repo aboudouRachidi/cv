@@ -24,7 +24,7 @@ class Cv extends CI_Controller {
 			$this->Cv_model->new_cv($data);
 		
 			$data = $this->session->set_flashdata('info','Le cv "'.'<b> '.$this->input->post('accroche').'"</b> a été créer');
-		
+			
 			redirect(base_url('cv',$data));
 		
 		}else{

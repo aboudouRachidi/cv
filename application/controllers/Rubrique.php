@@ -15,9 +15,11 @@ class Rubrique extends CI_Controller {
 		$this->form_validation->set_rules('contenu','Contenu','trim|required|xss_clean');
 		
 		if ($this->form_validation->run()){
+			
 			$data = array(
 					'titre' =>$this->input->post('titre'),
 					'contenu' =>$this->input->post('contenu'),
+					'position'=>$this->input->post('position'),
 					'idcv' =>$this->input->post('idcv'),
 			);
 		
@@ -30,6 +32,7 @@ class Rubrique extends CI_Controller {
 		}else{
 			//$data['users'] = $this->Rubrique_model->getUser_cv(1);
 			$data['cvs'] = $this->Cv_model->getCv($this->uri->segment(3));
+			$data['position'] = $this->Rubrique_model->getMaxPositionRubrique($this->uri->segment(3));
 			
 			$this->load->view('templates/header');
 			$this->load->view('templates/menu');
@@ -89,10 +92,44 @@ class Rubrique extends CI_Controller {
 		*/
 	}
 	
-	public function positionRubrique(){
+	public function positionRubriqueDown(){
 		
-		$this->Rubrique_model->PositionRubrique($this->uri->segment(3));
+		//$PositionMin = $this->Rubrique_model->getMinPositionRubrique($this->uri->segment(3));
+		$PositionMin = 0;
+		
+		if($this->uri->segment(5) == $PositionMin){
+			
+			$this->session->set_flashdata('erreur', '<b>La rubrique est déjà en première position</b>');
+			redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+			
+		}else{
+		
+		$this->Rubrique_model->updatePosition($this->uri->segment(5)- 1,$this->uri->segment(3));
+	
 		$data = $this->session->set_flashdata('info', '<b>Position modifié</b>');
+		
 		redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+		}
+	}
+	
+	public function positionRubriqueUp(){
+	
+		$PositionMax = $this->Rubrique_model->getMaxPositionRubrique($this->uri->segment(4));
+		
+		if($this->uri->segment(5) == $PositionMax){
+				
+			$this->session->set_flashdata('erreur', '<b>La rubrique est déjà en dernière position</b>');
+			
+			redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+				
+		}else{
+			
+			$this->Rubrique_model->updatePosition($this->uri->segment(5)+ 1,$this->uri->segment(3));
+		
+			$data = $this->session->set_flashdata('info', '<b>Position modifié '.$PositionMax.'</b>');
+			
+			redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+		
+		}
 	}
 }

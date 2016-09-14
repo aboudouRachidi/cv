@@ -32,7 +32,15 @@
 						            </script>
                         <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
                     </div>
-                </div>                   
+                </div>
+                
+                <div class="form-group">
+                    <label for="version">Position : </label><?= form_error('position', '<div class="alert alert-danger">','</div>');?>
+                    <div class="input-group">
+                        <input name="position" type="number"  readonly value="<?=$position + 1?>" class="form-control"  required>
+                        <span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
+                    </div>
+                </div>                                     
 				
 				<input type="submit" class="btn btn-primary" value="VALIDER">
 			 

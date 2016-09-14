@@ -61,9 +61,9 @@
 							</div>
 							
 							<div class="col-md-4">
-								<a href="#" type="button" class="btn btn-default btn-xs" title='Rubrique "<?= $rubrique->titre?>" Position +1'>
+								<a href="<?=base_url('rubrique/positionRubriqueDown/'.$rubrique->idrubrique.'/'.$rubrique->idcv.'/'.$rubrique->position)?>" type="button" class="btn btn-default btn-xs" title='Rubrique "<?= url_title($rubrique->titre)?>" Position -1'>
 									<i class="fa fa-arrow-circle-up" aria-hidden="true"></i></a>
-								<a href="#" type="button" class="btn btn-default btn-xs" title='Rubrique "<?= $rubrique->titre?>" Position -1'>
+								<a href="<?=base_url('rubrique/positionRubriqueUp/'.$rubrique->idrubrique.'/'.$rubrique->idcv.'/'.$rubrique->position)?>" type="button" class="btn btn-default btn-xs" title='Rubrique "<?= url_title($rubrique->titre)?>" Position +1'>
 									<i class="fa fa-arrow-circle-down" aria-hidden="true"></i></a>
 								<a href="<?=base_url('rubrique/update_rubrique/'.$rubrique->idrubrique.'/'.$rubrique->idcv)?>" type="button" class="btn btn-success btn-xs" title="Modifier">
 									<i class="fa fa-pencil-square" aria-hidden="true" ></i></a>

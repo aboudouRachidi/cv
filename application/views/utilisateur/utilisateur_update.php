@@ -4,13 +4,13 @@
 <div class="col-md-4">
 	<div class="jumbotron">
 		<address>
-			<strong><i class="fa fa-user" aria-hidden="true"></i>&nbsp;<?=$user->nom.' '.$user->prenom;?></strong><br>
-					<i class="fa fa-home" aria-hidden="true"></i> <?=$user->adresse?><br>
-					<?=$user->cp.', '.$user->ville?><br>
+			<strong><i class="fa fa-user" aria-hidden="true"></i>&nbsp; <?=$user->nom.' '.$user->prenom;?></strong><br>
+					<i class="fa fa-home" aria-hidden="true"></i>&nbsp;<?=$user->adresse?><br>
+					<i class="fa fa-map-marker" aria-hidden="true"></i>&nbsp; <?=$user->cp.', '.$user->ville?><br>
 		</address>
 						
 		<address>
-			<strong><i class="fa fa-envelope" aria-hidden="true"></i></strong>
+			<strong><abbr title = "E-mail"><i class="fa fa-envelope" aria-hidden="true"></i></abbr></strong>
 				<a href="#"><?=$_SESSION['auth']['email']?></a><br>
 				<abbr title = "Tel"><i class="fa fa-phone"></i></abbr> <?=$user->mobile?>
 		</address>
@@ -51,7 +51,7 @@
 		<div class="form-group">
 			<label for="pseudo">Pseudo : </label><?= form_error('pseudo', '<div class="alert alert-danger">','</div>');?>
 			<div class="input-group">
-				<input name="pseudo" type="text" value="<?=$user->pseudo?>" class="form-control"  id="InputPseudo" placeholder="Pseudo">
+				<input name="pseudo" type="text" value="<?=$user->pseudo?>" class="form-control" disabled id="InputPseudo" placeholder="Pseudo">
 				<span class="input-group-addon"><span class="glyphicon glyphicon-asterisk"></span></span>
 			</div>
 		</div>

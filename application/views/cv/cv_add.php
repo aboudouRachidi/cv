@@ -28,22 +28,21 @@
 			 
 	</form>
 	</div>
-	
+	<hr>
         <!-- Content Row -->
         <div class="row">
         	<?php if(!empty($cvs)):?>
 			<?php foreach ($cvs as $cv):?>
 				<!-- .col-md-4 -->
 	            <div class="col-md-4 well">
-	                <h3><i class="fa fa-file-text-o" aria-hidden="true"></i> <?= $cv->accroche?></h3>
+	                <h3><i class="fa fa-file-text-o" aria-hidden="true"></i>&nbsp;<?=$cv->accroche?></h3>
 						<i class="fa fa-calendar-check-o" aria-hidden="true"></i>&nbsp;<?php $bad_date = $cv->date_creation; echo $better_date = nice_date($bad_date, 'd-m-Y H:i:s')?><br>
-						<i class="fa fa-cog" aria-hidden="true"> Version</i>&nbsp;<?=$cv->num_version?><br>
+						<i class="fa fa-cog" aria-hidden="true">  Version</i>&nbsp;<?=$cv->num_version?><br>
 	                <a class="btn btn-success btn-xs" href="<?=base_url('cv/viewCv/'.$cv->idcv)?>">Editer</a>
 	            </div>
 	            <!-- /.col-md-4 -->
 			<?php endforeach; ?>
 			<?php endif; ?>
-
         </div>
         <!-- /.row -->
 </div>

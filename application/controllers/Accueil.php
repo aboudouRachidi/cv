@@ -13,7 +13,8 @@ class Accueil extends CI_Controller {
 		
 		$data['users'] = $this->Utilisateur_model->getAll($_SESSION['auth']['id']);
 		$data['cvs'] = $this->Rubrique_model->getAll_cv($_SESSION['auth']['id']);
-		$data['rubriques'] = $this->Rubrique_model->getRubrique($_SESSION['auth']['id']);
+		//$data['rubriques'] = $this->Rubrique_model->getRubrique($_SESSION['auth']['id']);
+		$data['total_cv'] = $this->Cv_model->countCv($_SESSION['auth']['id']);
 		
 		$this->load->view('templates/header');
 		$this->load->view('templates/menu');
@@ -26,7 +27,7 @@ class Accueil extends CI_Controller {
 	{
 		if($this->session->userdata('auth') || $this->session->userdata('logged')){
 				
-			redirect(base_url('index/accueil_view'));
+			redirect(base_url('accueil'));
 				
 		}
 			
