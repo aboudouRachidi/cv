@@ -140,9 +140,9 @@ class Rubrique_model extends CI_Model {
 	
 	}
 	
-	public function getNewPositionRubriqueId($position){
+	public function getNewPositionRubriqueId($position,$idcv){
 		
-		$query = $this->db->select('idrubrique')->where('position  = '.$position)->get('rubrique')->result_array();
+		$query = $this->db->select('idrubrique')->where('position  = '.$position.' AND idcv = '.$idcv)->get('rubrique')->result_array();
 		return (int) $query[0]['idrubrique'];
 		
 	}

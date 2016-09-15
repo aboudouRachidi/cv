@@ -79,7 +79,7 @@
 									        <h4 class="modal-title text-center" id="myModalLabel">Confirmation suppression</h4>
 									      </div>
 									      <div class="modal-body">
-									        Etes vous sûr de vouloir supprimer cette rubrique ?
+									        Etes vous sûr de vouloir supprimer cette rubrique "<?=$rubrique->titre?>" ?
 									      </div>
 									      <div class="modal-footer">
 									    	<a href="<?=base_url('rubrique/deleteRubrique/'.$rubrique->idrubrique.'/'.$rubrique->idcv)?>" type="button" class="btn btn-danger" title="Supprimer">

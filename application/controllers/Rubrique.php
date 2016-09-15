@@ -97,23 +97,37 @@ class Rubrique extends CI_Controller {
 		//$PositionMin = $this->Rubrique_model->getMinPositionRubrique($this->uri->segment(3));
 		$PositionMin = 0;
 		
+		
 		if($this->uri->segment(5) == $PositionMin){
 			
 			$this->session->set_flashdata('erreur', '<b>La rubrique est déjà en première position</b>');
 			redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
 			
 		}else{
-		
-		$this->Rubrique_model->updatePosition($this->uri->segment(5)- 1,$this->uri->segment(3));
-	
-		$data = $this->session->set_flashdata('info', '<b>Position modifié</b>');
-		
-		redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+
+			$positionActuelle = $this->uri->segment(5);
+			
+			$idRubrique = $this->Rubrique_model->getNewPositionRubriqueId($positionActuelle - 1,$this->uri->segment(4));
+			
+			if($this->Rubrique_model->updateNewPosition($positionActuelle,$idRubrique)){
+				
+				$data = $this->session->set_flashdata('erreur', '<b>Une erreur est survenue</b>');
+				redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+				
+			}else{
+			
+				$this->Rubrique_model->updatePosition($this->uri->segment(5)- 1,$this->uri->segment(3));
+			
+				$data = $this->session->set_flashdata('info', '<b>Position modifié</b>');
+				
+				redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+			}
 		}
 	}
 	
 	public function positionRubriqueUp(){
 	
+		
 		$PositionMax = $this->Rubrique_model->getMaxPositionRubrique($this->uri->segment(4));
 		
 		if($this->uri->segment(5) == $PositionMax){
@@ -124,11 +138,22 @@ class Rubrique extends CI_Controller {
 				
 		}else{
 			
-			$this->Rubrique_model->updatePosition($this->uri->segment(5)+ 1,$this->uri->segment(3));
-		
-			$data = $this->session->set_flashdata('info', '<b>Position modifié '.$PositionMax.'</b>');
+			$positionActuelle = $this->uri->segment(5);
+			$idRubrique = $this->Rubrique_model->getNewPositionRubriqueId($positionActuelle + 1,$this->uri->segment(4));
 			
-			redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+			if($this->Rubrique_model->updateNewPosition($positionActuelle,$idRubrique)){
+			
+				$data = $this->session->set_flashdata('erreur', '<b>Une erreur est survenue</b>');
+				redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+			
+			}else{
+				
+				$this->Rubrique_model->updatePosition($this->uri->segment(5)+ 1,$this->uri->segment(3));
+			
+				$data = $this->session->set_flashdata('info', '<b>Position modifié '.$PositionMax.'</b>');
+				
+				redirect(base_url('cv/viewCv/'.$this->uri->segment(4),$data));
+			}
 		
 		}
 	}

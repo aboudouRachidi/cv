@@ -25,7 +25,7 @@
 	
 	
 	<div class="col-md-6">
-			<h3>Inscription utilisateur</h3>
+			<h3>Inscription utilisateurS</h3>
 			<p>Pas encore inscrit ? Inscrivez-vous dès maintenant pour créer votre CV en ligne.</p>
 		<div class="jumbotron">	
 	<form action="<?=base_url('utilisateur/newUser')?>" method="POST">
